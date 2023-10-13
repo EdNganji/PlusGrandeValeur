@@ -1,68 +1,58 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+package objet;
 import java.util.Scanner;
 
+/**
+* <h1>PlusGrandeValeur!</h1>
+* le programme c'est une application qui permet de
+* créer une suite de 15 nombres aléatoires
+* compris entre 0 et 100
+* et renvoie la chaine, et puis le plus grand nombre
+* et son index dans la chaine
+* 
+* @author  Daniel NGANJIP
+* @version 1.0
+* @since   22023-10-12
+*/
+
 public class PlusGrandeValeur {
+
+    /**
+   * Cette méthode propose de choisir entre les tableaux 
+   *et les listes chainées pour stocker les fichiers
+     */
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Choisissez le type de données à utiliser :");
-        System.out.println("1. Tableau (ArrayList)");
-        System.out.println("2. Liste chaînée (LinkedList)");
+        System.out.println("1. Tableau ");
+        System.out.println("2. Liste chaînée ");
         System.out.print("Votre choix : ");
+
         int choix = scanner.nextInt();
 
-        List<Integer> donnees;
-
         if (choix == 1) {
-            donnees = new ArrayList<>();
+            avecTab Tab = new avecTab();
+            
+            Tab.remplirTableau(Tab.donnees);
+            Tab.afficherTableau(Tab.donnees);
+            Tab.Maximum(Tab.donnees);
+
         } else if (choix == 2) {
-            donnees = new LinkedList<>();
+            avecList List = new avecList();
+            List.remplirListe(List.donnees);
+            List.afficherListe(List.donnees);
+            List.Maximum(List.donnees);
         } else {
             System.out.println("Choix invalide. Le programme se termine.");
             scanner.close();
             return;
         }
 
-        remplirTableauOuListe(donnees);
-        afficherTableauOuListe(donnees);
-        trouverPlusGrandeValeur(donnees);
+        
 
         scanner.close();
     }
 
-    // Remplir le tableau ou la liste avec des valeurs aléatoires
-    public static void remplirTableauOuListe(List<Integer> donnees) {
-        Random random = new Random();
-        for (int i = 0; i < 15; i++) {
-            donnees.add(random.nextInt(101)); // Valeurs aléatoires de 0 à 100
-        }
-    }
-
-    // Afficher le tableau ou la liste
-    public static void afficherTableauOuListe(List<Integer> donnees) {
-        System.out.println("Contenu du tableau ou de la liste :");
-        for (int i = 0; i < donnees.size(); i++) {
-            System.out.println("Index " + i + ": " + donnees.get(i));
-        }
-    }
-
-    // Trouver la plus grande valeur et son index
-    public static void trouverPlusGrandeValeur(List<Integer> donnees) {
-        int plusGrandeValeur = donnees.get(0);
-        int indexPlusGrandeValeur = 0;
-
-        for (int i = 1; i < donnees.size(); i++) {
-            int valeurActuelle = donnees.get(i);
-            if (valeurActuelle > plusGrandeValeur) {
-                plusGrandeValeur = valeurActuelle;
-                indexPlusGrandeValeur = i;
-            }
-        }
-
-        System.out.println("La plus grande valeur est : " + plusGrandeValeur);
-        System.out.println("Elle se trouve à l'index : " + indexPlusGrandeValeur);
-    }
+   
 }
